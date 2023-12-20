@@ -1,34 +1,51 @@
-import React from 'react'
-import logo from '../assest/Logo.png';
+import React, { useState } from 'react';
+import Logo from '../assest/Logo.png';
+import { IoMdMenu } from "react-icons/io";
 
-const NavBar = () => {
-    let Links =[
-        {name:"SERVICES",link:"/"},
-        {name:"ABOUT US",link:"/"},
-        {name:"CONTACT US",link:"/"},
-        {name:"CAREERS",link:"/"},
-    ];
+function NavBar() {
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+      setIsMenuOpen(!isMenuOpen);
+    };
+
   return (
-    <div className='fixed top-0 left-0 z-50 w-full shadow-2xl'>
-        <div className='items-center justify-between py-4 bg-[#6B3CC9] md:flex md:px-10 pt-3 pb-4 '>
-        <div className='text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-800'>
-            {/* AT DIGITAL */}
-            <img src={logo} alt="Logo" />
-        </div>
-        <ul className='md:flex md:items-center'>
-            {
-                Links.map((Link)=>(
-                    <li key={Link.name} className='text-xl md:ml-8'>
-                        <a href={Link.link} className='text-white hover:text-gray-400'>{Link.name}</a>
-                    </li>
-                ))
-            }
+    <div className='flex justify-between h-16 footer-bg'>
+      <div className='pt-2 pl-12'>
+        <img src={Logo} alt='' />
+      </div>
+
+      <div className='hidden lg:flex'>
+        <ul className='flex gap-4 pt-5 pr-5 text-white'>
+          <li className='font-semibold cursor-pointer hover:text-gray-400'>SERVICES</li>
+          <li className='font-semibold cursor-pointer hover:text-gray-400'>ABOUT US</li>
+          <li className='font-semibold cursor-pointer hover:text-gray-400'>CONTACT US</li>
+          <li className='font-semibold cursor-pointer hover:text-gray-400'>CAREERS</li>
         </ul>
+      </div>
+
+
+      <div className='lg:hidden'>
+        <button
+          className='p-2 text-white hover:text-gray-400'
+          onClick={toggleMenu}
+        >
+         <IoMdMenu className='pt-1 text-4xl'/>
+        </button>
+      </div>
+
+     
+      {/* {isMenuOpen && (
+        <div className='absolute bg-gray-800 lg:hidden top-5 left-1'>
+          <ul className='flex flex-col gap-4 p-4 '>
+            <li className='font-semibold'>SERVICES</li>
+            <li className='font-semibold'>ABOUT US</li>
+            <li className='font-semibold'>CONTACT US</li>
+            <li className='font-semibold'>CAREERS</li>
+          </ul>
         </div>
+      )} */}
     </div>
-
-
   )
-}
- 
-export default NavBar;
+} export default NavBar;
